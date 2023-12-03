@@ -3,15 +3,18 @@ const bodyParser = require("body-parser");
 var fs = require('fs');
 const nodemailer = require("nodemailer");
 const app= express();
-
+const path = require("path");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 
+
 app.get("/", function(req,res){
-    res.render("index");
+    // res.sendFile("index,html");
+    const indexPath = path.join(__dirname, "index.html");
+    res.sendFile(indexPath);
 });
 app.get("/contacts", function(req,res){
     res.render("contacts");
